@@ -5,14 +5,13 @@ from datetime import date
 
 
 class RegStepOneSerializer(serializers.Serializer):
+	passport = serializers.CharField(max_length=10)
+
 	class Meta:
 		model = RegStepOne
-		fields = ('full_name', "passport, 'birthday'")
+		fields = ('full_name', 'passport', 'birthday')
 
-	def validate(self, data):
-		full_name = data.get('full_name')
-		passport = data.get('passport')
-		birthday = data.get('birthday')
-
-		if len(passport.replase(' ', '')) != 7:
+	def validate_passport(self, value):
+		if len(value.replace(' ','')) != 9:
 			raise ValidationError("pasport ma'lumotlari xato kiritilgan")
+		return value

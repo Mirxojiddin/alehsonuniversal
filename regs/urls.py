@@ -1,9 +1,9 @@
 from django.urls import path
-from regs.views import salom
+from regs.views import RegStepOneApiView
 
 app_name = 'regs'
 urlpatterns = [
-	path('/', salom, name = 'salom')
+	path('/', RegStepOneApiView.as_view(), name='regOne')
 
 
 
