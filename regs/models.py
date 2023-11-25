@@ -19,4 +19,18 @@ class RegStepOne(models.Model):
 		self.fields['passport'].error_messages = {
 			'max_length': "Passport ma'lumotlari xato kiritilgan"}
 
-# Create your models here.
+
+class PaginationType(models.Model):
+	name = models.CharField(max_length=100)
+
+	def __str__(self):
+		return self.name
+
+
+class RegStepTwo(models.Model):
+	card_number = models.CharField(verbose_name="Plastig raqam",max_length=20, null=False, blank=False)
+	pagination_type = models.ForeignKey(PeginationType, on_delete=models.CASCADE, null=False, blank=False)
+	information = models.TextField(null=False, blank=False)
+
+	def __str__(self):
+		return self.information
