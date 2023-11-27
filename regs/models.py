@@ -34,3 +34,26 @@ class RegStepTwo(models.Model):
 
 	def __str__(self):
 		return self.information
+
+
+class Province(models.Model):
+	name = models.CharField(max_length=50)
+
+	class Meta:
+		ordering = ['name']
+
+	def __str__(self):
+		return self.name
+
+
+class District(models.Model):
+	name = models.CharField(max_length=50)
+	province = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='district')
+
+	class Meta:
+		ordering = ['province', 'name']
+
+	def __str__(self):
+		return self.name
+
+
