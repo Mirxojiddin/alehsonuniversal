@@ -4,6 +4,9 @@ from rest_framework.exceptions import ValidationError
 
 
 class RegStepOneSerializer(serializers.ModelSerializer):
+	province_id = serializers.IntegerField()
+	district_id = serializers.IntegerField()
+
 	passport = serializers.CharField(max_length=10, required=True, error_messages={
 		'max_length': "Passport ma'lumotlari xato kiritilgan",
 		'required': "Pasport ma'lumotlari kiritilmagan"
@@ -19,7 +22,7 @@ class RegStepOneSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = RegStepOne
-		fields = ('full_name', 'passport', 'birthday')
+		fields = ('full_name', 'passport', 'birthday', 'district_id','province_id')
 
 	def validate_passport(self, value):
 		if not value:
@@ -33,7 +36,7 @@ class RegStepOneSerializer(serializers.ModelSerializer):
 		for char in check_value[2:]:
 			if not char.isdigit():
 				raise ValidationError("pasport ma'lumotlari xato kiritilgan")
-		return value
+		return check_value
 
 	def validate_full_name(self, value):
 		for char in value:
