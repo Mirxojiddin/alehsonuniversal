@@ -169,3 +169,11 @@ class PaginationSerializer(serializers.ModelSerializer):
 			raise ValidationError("Telefon raqam xato kiritilgan")
 
 		return value
+
+
+class PaginationType2Serializer(serializers.ModelSerializer):
+	pagination = PaginationSerializer(many=True, read_only= True)
+
+	class Meta:
+		model = PaginationType
+		fields = ('name', 'pagination')
